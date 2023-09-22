@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { NameSpace } from '../lib/name-space';
+import { postsSlice } from '../../../../widgets/posts-list';
 
 export const rootReducer = combineReducers({
-  [NameSpace.Placeholder]: placeholderSlice.reducer,
+  [postsSlice.reducerPath]: postsSlice.reducer,
 });

@@ -1,3 +1,3 @@
 export enum NameSpace {
-  Placeholder = 'Placeholder',
+  Posts = 'Posts',
 }
