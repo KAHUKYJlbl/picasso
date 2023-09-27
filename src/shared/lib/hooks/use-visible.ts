@@ -8,11 +8,10 @@ export const useVisible = (
     threshold: 0.5,
   }
 ) => {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const {current: elementRef} = ref;
-    console.log(ref.current?.dataset.page);
 
     if (elementRef) {
       const observer = new IntersectionObserver(
