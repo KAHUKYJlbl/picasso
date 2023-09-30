@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import { RefListElement } from '../lib/types';
+import { RefObject, useEffect, useState } from 'react';
 
 export const useVirtual = (
-  refList: RefListElement[],
+  upRef: RefObject<HTMLLIElement>,
+  downRef: RefObject<HTMLLIElement>,
   options = {
     root: null,
     rootMargin: '0px',
@@ -13,17 +12,32 @@ export const useVirtual = (
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    refList.forEach((elementRef) => {
-      if (elementRef.element) {
-        const observer = new IntersectionObserver(
-          ([entry]) => setCurrentPage((current) => entry.isIntersecting ? elementRef.page : current), options
-        );
+    if (upRef.current) {
+      const upObserver = new IntersectionObserver(
+        ([entry]) => setCurrentPage((current) => {
+          console.log(current);
+          return entry.isIntersecting && current !== 0
+          ? current - 1
+          : current
+        }), options
+      );
 
-        observer.observe(elementRef.element);
-      }
-    });
+      upObserver.observe(upRef.current);
+    }
 
-  }, [refList, options]);
+    if (downRef.current) {
+      const downObserver = new IntersectionObserver(
+        ([entry]) => setCurrentPage((current) => {
+          console.log(current);
+          return entry.isIntersecting
+          ? current + 1
+          : current
+        }), options
+      );
+
+      downObserver.observe(downRef.current);
+    }
+  }, [upRef, downRef, options]);
 
   return currentPage;
 }

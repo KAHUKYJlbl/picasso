@@ -10,8 +10,11 @@ export const postsSlice = createApi({
   reducerPath: NameSpace.Posts,
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
-    getPosts: builder.query<PostType[], GetPostsArgType>({
-      query: ({ page, limit }) => `?_limit=${limit * page}`,
+    getPosts: builder.query<{apiResponse: PostType[], totalCount: number}, GetPostsArgType>({
+      query: ({ firstElement, quantity }) => `?_start=${firstElement}&_limit=${quantity}`,
+      transformResponse(apiResponse: PostType[], meta) {
+        return { apiResponse, totalCount: Number(meta?.response?.headers.get('X-Total-Count')) }
+      }
     }),
   }),
 });
