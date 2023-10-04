@@ -7,9 +7,7 @@ import { Post } from '../../../entities/post';
 import { Oops } from '../../oops';
 
 import { useGetPostsQuery } from '../model/posts-slice';
-
-const POSTS_PER_PAGE = 10;
-const POSTS_QUANTITY = POSTS_PER_PAGE * 3;
+import { POSTS_PER_PAGE, SHOWN_PAGES } from '../lib/const';
 
 export const PostsList = (): JSX.Element => {
   const upRef = useRef<HTMLLIElement>(null);
@@ -18,7 +16,7 @@ export const PostsList = (): JSX.Element => {
   const [ currentPage, setCurrentPage ] = useState(1);
   const { data, error, isLoading } = useGetPostsQuery({
     firstElement: ( (currentPage - 1) * POSTS_PER_PAGE ),
-    quantity: POSTS_QUANTITY
+    quantity: SHOWN_PAGES * POSTS_PER_PAGE,
   });
 
   useEffect(() => {

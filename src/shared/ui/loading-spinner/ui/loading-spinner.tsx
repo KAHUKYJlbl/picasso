@@ -5,7 +5,7 @@ const spinnerTypes = {
   page: {
     height: '240',
     width: '240',
-    color: '#7575e2',
+    color: '#99c1ff',
     wrapperStyle: {
       height: '100vh',
     },
@@ -14,7 +14,7 @@ const spinnerTypes = {
     height: '240',
     width: '240',
     wrapperHeight: '100%',
-    color: '#7575e2',
+    color: '#99c1ff',
     wrapperStyle: {
       padding: '40px',
       height: '100%'

@@ -16,7 +16,10 @@ export const postsSlice = createApi({
         return { apiResponse, totalCount: Number(meta?.response?.headers.get('X-Total-Count')) }
       }
     }),
+    getPostById: builder.query<PostType, number>({
+      query: ( id ) => `/${id}`,
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = postsSlice;
+export const { useGetPostsQuery, useGetPostByIdQuery } = postsSlice;

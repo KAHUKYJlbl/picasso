@@ -23,7 +23,7 @@ export const Layout = ({children}: LayoutProps): JSX.Element => (
       </AppBar>
     </Box>
 
-    <Container maxWidth='md' sx={{height: '87vh'}}>
+    <Container maxWidth='md'>
       {children}
     </Container>
   </>
