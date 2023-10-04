@@ -13,7 +13,7 @@ export const PostsList = (): JSX.Element => {
   const upRef = useRef<HTMLLIElement>(null);
   const downRef = useRef<HTMLLIElement>(null);
   const scrollDirection = useVisible(upRef, downRef);
-  const [ currentPage, setCurrentPage ] = useState(1);
+  const [ currentPage, setCurrentPage ] = useState( Number( window.localStorage.getItem('currentPage') ) || 1 );
   const { data, error, isLoading } = useGetPostsQuery({
     firstElement: ( (currentPage - 1) * POSTS_PER_PAGE ),
     quantity: SHOWN_PAGES * POSTS_PER_PAGE,
@@ -28,6 +28,8 @@ export const PostsList = (): JSX.Element => {
       }
       );
     };
+
+    return () => window.localStorage.setItem( 'currentPage', currentPage.toString() );
   }, [scrollDirection]);
 
   if (!data || isLoading) {
