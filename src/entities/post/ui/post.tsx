@@ -16,7 +16,7 @@ export const Post = forwardRef((props: PostProps, ref?: React.ForwardedRef<HTMLL
   return (
     <ListItem ref={ref} sx={{mb: '10px'}} component="li" disablePadding>
       <Box sx={{ minWidth: 300, width: '100%' }}>
-        <Card variant="outlined" sx={{pr: '20px', pl: '20px'}}>
+        <Card variant="outlined" sx={{pr: '20px', pl: '20px', boxShadow: '0 0 7px #99c1ff'}}>
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
               {props.post.id}
